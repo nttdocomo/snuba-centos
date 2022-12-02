@@ -78,6 +78,8 @@ RUN set -x \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
   && tar -xzf ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz -C /tmp/uwsgi-dogstatsd --strip-components=1 \
+  && cd /tmp/uwsgi-dogstatsd \
+  && ls -l \
   && uwsgi --build-plugin /tmp/uwsgi-dogstatsd \
   && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz \
   && mkdir -p /var/lib/uwsgi \
