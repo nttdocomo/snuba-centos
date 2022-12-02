@@ -69,7 +69,7 @@ RUN set -x \
   " \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
-  && tar -xzJC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
+  && tar -xzC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
@@ -78,10 +78,7 @@ RUN set -x \
   && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder \
   && mkdir -p /var/lib/uwsgi \
   && mv dogstatsd_plugin.so /var/lib/uwsgi/ \
-  && yum clean all
-
-RUN set -x \
-  && tar -xJC ./ --strip-components=1 -f snuba-21.5.0.tar.xz \
+  && yum clean all \
   && chown -R xiaoju:xiaoju ./; \
   && pip install -e .; \
   && snuba --help;
