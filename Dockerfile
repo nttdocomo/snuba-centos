@@ -1,7 +1,7 @@
 # FROM python:3.6.13-slim-buster
 FROM centos:7.8.2003 AS relay-deps
 
-ENV PYTHON_VERSION 3.8.15
+ENV PYTHON_VERSION 3.8.10
 
 ENV PYTHON_PIP_VERSION 21.1.2
 ENV PYTHON_SETUPTOOLS_VERSION 57.0.0
@@ -67,6 +67,7 @@ RUN set -x \
   && buildDeps="$buildDeps \
   lz4-devel \
   pcre-devel \
+  libffi-devel \
   " \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
