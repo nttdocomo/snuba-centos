@@ -18,10 +18,7 @@ RUN set -x \
     && make -j$(nproc) && make altinstall \
     && echo "/usr/local/lib/" > /etc/ld.so.conf.d/local.conf && ldconfig \
     # && pip3.8 install -i https://mirrors.aliyun.com/pypi/simple/ --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
-    && pip3.8 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION setuptools==$PYTHON_SETUPTOOLS_VERSION \
-    && python --version \
-    && pip --version \
-    && easy_install --version \
+    && pip3.8 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
     && find /usr/local \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
@@ -74,6 +71,7 @@ RUN set -x \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
   && tar -xzC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
+  && pip install -r setuptools==$PYTHON_SETUPTOOLS_VERSION \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
