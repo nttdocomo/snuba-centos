@@ -79,9 +79,9 @@ RUN set -x \
   && mkdir -p /var/lib/uwsgi \
   && mv dogstatsd_plugin.so /var/lib/uwsgi/ \
   && yum clean all \
-  && chown -R xiaoju:xiaoju ./; \
-  && pip install -e .; \
-  && snuba --help;
+  && chown -R xiaoju:xiaoju ./ \
+  && pip install -e . \
+  && snuba --help
 
 ARG SNUBA_VERSION_SHA
 ENV SNUBA_RELEASE=$SNUBA_VERSION_SHA \
