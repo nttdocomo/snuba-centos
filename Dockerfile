@@ -85,7 +85,7 @@ RUN set -x \
   && yum clean all \
   && groupadd -r snuba; \
   && useradd -r -g snuba snuba; \
-  && chown -R xiaoju:xiaoju ./ \
+  && chown -R snuba:snuba ./ \
   && pip install -e . \
   && snuba --help
 
