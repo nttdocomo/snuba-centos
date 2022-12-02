@@ -83,8 +83,8 @@ RUN set -x \
   && mv dogstatsd_plugin.so /var/lib/uwsgi/ \
   && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz \
   && yum clean all \
-  && groupadd -r snuba; \
-  && useradd -r -g snuba snuba; \
+  && groupadd -r snuba \
+  && useradd -r -g snuba snuba \
   && chown -R snuba:snuba ./ \
   && pip install -e . \
   && snuba --help
