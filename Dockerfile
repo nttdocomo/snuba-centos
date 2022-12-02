@@ -36,20 +36,6 @@ RUN cd /usr/local/bin \
 
 ENV PATH="/usr/local/bin/python3/bin:${PATH}"
 
-# Sane defaults for pip
-ENV \
-  PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=1 \
-  # Sentry config params
-  SENTRY_CONF=/etc/sentry \
-  # Disable some unused uWSGI features, saving dependencies
-  # Thank to https://stackoverflow.com/a/25260588/90297
-  UWSGI_PROFILE_OVERRIDE=ssl=false;xml=false;routing=false \
-  # UWSGI dogstatsd plugin
-  UWSGI_NEED_PLUGIN=/var/lib/uwsgi/dogstatsd \
-  # grpcio>1.30.0 requires this, see requirements.txt for more detail.
-  GRPC_POLL_STRATEGY=epoll1
-
 WORKDIR /usr/src/snuba
 
 COPY ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz .
@@ -78,7 +64,7 @@ RUN set -x \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
   && tar -xzf ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz -C /tmp/uwsgi-dogstatsd --strip-components=1 \
-  && UWSGI_NEED_PLUGIN="" uwsgi --build-plugin /tmp/uwsgi-dogstatsd \
+  && uwsgi --build-plugin /tmp/uwsgi-dogstatsd \
   && mkdir -p /var/lib/uwsgi \
   && mv dogstatsd_plugin.so /var/lib/uwsgi/ \
   && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz \
