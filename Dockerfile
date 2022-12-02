@@ -74,7 +74,6 @@ RUN set -x \
   && pip install setuptools==$PYTHON_SETUPTOOLS_VERSION \
   && python --version \
   && pip --version \
-  && easy_install --version \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
