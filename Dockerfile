@@ -8,7 +8,7 @@ ENV PYTHON_PIP_VERSION 22.0.4
 COPY ./python.tar.xz /
 
 RUN set -x \
-    && yum --nogpg install -y gcc make zlib-devel \
+    && yum --nogpg install -y gcc make zlib-devel openssl-devel \
     && mkdir -p /usr/src/python \
     && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
     && rm python.tar.xz* \
