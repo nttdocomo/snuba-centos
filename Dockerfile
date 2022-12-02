@@ -19,6 +19,9 @@ RUN set -x \
     && echo "/usr/local/lib/" > /etc/ld.so.conf.d/local.conf && ldconfig \
     # && pip3.8 install -i https://mirrors.aliyun.com/pypi/simple/ --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
     && pip3.8 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION setuptools==$PYTHON_SETUPTOOLS_VERSION \
+    && python --version \
+    && pip --version \
+    && easy_install --version \
     && find /usr/local \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
