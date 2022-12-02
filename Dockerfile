@@ -9,7 +9,7 @@ ENV PYTHON_SETUPTOOLS_VERSION 57.0.0
 COPY ./python.tar.xz /
 
 RUN set -x \
-    && yum --nogpg install -y gcc make zlib-devel openssl-devel \
+    && yum --nogpg install -y gcc make zlib-devel openssl-devel libffi-devel \
     && mkdir -p /usr/src/python \
     && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
     && rm python.tar.xz* \
@@ -67,7 +67,6 @@ RUN set -x \
   && buildDeps="$buildDeps \
   lz4-devel \
   pcre-devel \
-  libffi-devel \
   " \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
