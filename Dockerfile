@@ -16,7 +16,8 @@ RUN set -x \
     && ./configure --enable-shared \
     && make -j$(nproc) && make altinstall \
     && echo "/usr/local/lib/" > /etc/ld.so.conf.d/local.conf && ldconfig \
-    && pip3.8 install -i https://mirrors.aliyun.com/pypi/simple/ --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
+    # && pip3.8 install -i https://mirrors.aliyun.com/pypi/simple/ --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
+    && pip3.8 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
     && find /usr/local \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
