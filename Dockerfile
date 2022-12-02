@@ -51,7 +51,7 @@ ENV \
 WORKDIR /usr/src/snuba
 
 COPY ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz /
-COPY ./snuba-21.5.0.tar.xz .
+COPY ./snuba-21.5.0.tar.gz .
 
 # Copy and install dependencies first to leverage Docker layer caching.
 RUN set -x \
@@ -68,7 +68,7 @@ RUN set -x \
   " \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
-  && tar -xJC ./ --strip-components=1 -f snuba-21.5.0.tar.xz \
+  && tar -xJC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
