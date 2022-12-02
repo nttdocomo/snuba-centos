@@ -52,7 +52,7 @@ ENV \
 
 WORKDIR /usr/src/snuba
 
-COPY ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz /
+COPY ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz .
 COPY ./snuba-21.5.0.tar.gz .
 
 # Copy and install dependencies first to leverage Docker layer caching.
@@ -77,9 +77,9 @@ RUN set -x \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
-  && tar -xzf uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz -C /tmp/uwsgi-dogstatsd --strip-components=1 \
+  && tar -xzf ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz -C /tmp/uwsgi-dogstatsd --strip-components=1 \
   && uwsgi --build-plugin /tmp/uwsgi-dogstatsd \
-  && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder \
+  && rm -rf /tmp/uwsgi-dogstatsd .uwsgi_plugins_builder ./uwsgi-dogstatsd-bc56a1b5e7ee9e955b7a2e60213fc61323597a78.tar.gz \
   && mkdir -p /var/lib/uwsgi \
   && mv dogstatsd_plugin.so /var/lib/uwsgi/ \
   && yum clean all \
