@@ -69,7 +69,7 @@ RUN set -x \
   " \
   && yum makecache \
   && yum --nogpg install -y $buildDeps \
-  && tar -xJC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
+  && tar -xzJC ./ --strip-components=1 -f snuba-21.5.0.tar.gz \
   && pip install -r ./requirements.txt \
   # 必须安装
   && mkdir /tmp/uwsgi-dogstatsd \
