@@ -1,5 +1,5 @@
 # FROM python:3.6.13-slim-buster
-FROM centos:7.8.2003 AS relay-deps
+FROM centos:7.8.2003
 
 ENV PYTHON_VERSION 3.8.10
 
